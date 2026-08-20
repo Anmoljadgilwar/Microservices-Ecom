@@ -1,14 +1,7 @@
-import nodemailer from "nodemailer";
+import { BrevoClient } from "@getbrevo/brevo";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    type: "OAuth2",
-    user: "lamadevtest@gmail.com",
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-  },
+const brevo = new BrevoClient({
+  apiKey: process.env.BREVO_API_KEY!,
 });
 
 const sendMail = async ({
@@ -20,14 +13,26 @@ const sendMail = async ({
   subject: string;
   text: string;
 }) => {
-  const res = await transporter.sendMail({
-    from: '"Lama Dev" <lamadev@gmail.com>',
-    to: email,
-    subject,
-    text,
-  });
+  try {
+    const response = await brevo.transactionalEmails.sendTransacEmail({
+      sender: {
+        email: process.env.BREVO_SENDER_EMAIL!,
+        name: process.env.BREVO_SENDER_NAME || "E-Commerce App",
+      },
+      to: [
+        {
+          email,
+        },
+      ],
+      subject,
+      textContent: text,
+    });
 
-  console.log("MESSAGE SENT:", res);
+    console.log("EMAIL SENT:", response);
+  } catch (error) {
+    console.error("EMAIL FAILED:", error);
+    throw error;
+  }
 };
 
 export default sendMail;
