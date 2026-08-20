@@ -14,7 +14,7 @@ node_modules
 
 # Testing
 coverage
-EcomTest
+
 # Turbo
 .turbo
 
@@ -36,10 +36,3 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
-
-Notes.md
-install.md
-folderStruct.md
-progress
-email.md
-costEffective.md

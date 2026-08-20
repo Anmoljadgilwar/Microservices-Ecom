@@ -1,6 +1,6 @@
 services:
   kafka-broker-1:
-    image: bitnami/kafka:latest
+    image: bitnamilegacy/kafka:4.0.0-debian-12-r10
     container_name: kafka-broker-1
     environment:
       KAFKA_ENABLE_KRAFT: "yes"
@@ -19,7 +19,7 @@ services:
     networks:
       - kafka-network
   kafka-broker-2:
-    image: bitnami/kafka:latest
+    image: bitnamilegacy/kafka:4.0.0-debian-12-r10
     container_name: kafka-broker-2
     environment:
       KAFKA_ENABLE_KRAFT: "yes"
@@ -38,7 +38,7 @@ services:
     networks:
       - kafka-network
   kafka-broker-3:
-    image: bitnami/kafka:latest
+    image: bitnamilegacy/kafka:4.0.0-debian-12-r10
     container_name: kafka-broker-3
     environment:
       KAFKA_ENABLE_KRAFT: "yes"
