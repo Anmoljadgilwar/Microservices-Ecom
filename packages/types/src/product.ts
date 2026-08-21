@@ -5,12 +5,6 @@ export type ProductType = Product;
 
 export type ProductsType = ProductType[];
 
-export type StripeProductType = {
-  id: string;
-  name: string;
-  price: number;
-};
-
 export const colors = [
   "blue",
   "green",
@@ -80,14 +74,14 @@ export const ProductFormSchema = z
   .refine(
     (data) => {
       const missingImages = data.colors.filter(
-        (color: string) => !data.images?.[color]
+        (color: string) => !data.images?.[color],
       );
       return missingImages.length === 0;
     },
     {
       message: "Image is required for each selected color!",
       path: ["images"],
-    }
+    },
   );
 
 export type CategoryType = Category;
